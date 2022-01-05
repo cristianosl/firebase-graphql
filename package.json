@@ -4,12 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js"
+    "dev": "nodemon --exec babel-node src/index.js",
+    "start": "node -r esm src/index.js"
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
     "apollo-server": "^3.6.1",
     "apollo-server-express": "^3.6.1",
+    "esm": "^3.2.25",
     "express": "^4.17.2",
     "graphql": "^16.2.0",
     "graphql-subscriptions": "^2.0.0",
