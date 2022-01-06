@@ -20,7 +20,7 @@ async function startServer({ typeDefs, resolvers }) {
 
   SubscriptionServer.create(
     { schema, execute, subscribe },
-    { server: httpServer, path: server.graphqlPath }
+    { server: httpServer, path: '/subscriptions' }
   );
 
   httpServer.listen(PORT, () => {
@@ -28,7 +28,7 @@ async function startServer({ typeDefs, resolvers }) {
       `🚀 Query endpoint ready at http://localhost:${PORT}${server.graphqlPath}`
     );
     console.log(
-      `🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.graphqlPath}`
+      `🚀 Subscription endpoint ready at ws://localhost:${PORT}/subscriptions`
     );
   });
 }
