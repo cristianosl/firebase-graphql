@@ -1,10 +1,22 @@
 import { queuePositions, QUEUE_UPDATED } from ".";
-import { PubSub, withFilter } from "graphql-subscriptions";
+import { withFilter } from "graphql-subscriptions";
+import { RedisPubSub } from "graphql-redis-subscriptions";
+import Redis from "ioredis";
 
-// https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class
-// não recomedado em prod
-// sugestão https://github.com/davidyaha/graphql-redis-subscriptions
-const pubsub = new PubSub();
+const options = {
+  host: "127.0.0.1",
+  port: "6379",
+  db: 0,
+  retryStrategy: (times) => {
+    // reconnect after
+    return Math.min(times * 50, 2000);
+  },
+};
+const pubsub = new RedisPubSub({
+  publisher: new Redis(options),
+  subscriber: new Redis(options),
+});
+
 export const resolvers = {
   Query: {
     getAllQueuePositions: () => {
