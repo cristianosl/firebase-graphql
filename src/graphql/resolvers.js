@@ -39,6 +39,13 @@ export const resolvers = {
       });
       return currentQueuePosition;
     },
+    quitQueue: (_, data) => {
+      const queueItem = queuePositions.find(
+        (queue) => queue.queueId === data.queueId
+      );
+      queueItem.status = "ABANDONED";
+      return queueItem;
+    },
   },
   Subscription: {
     getQueueByPatientId: {

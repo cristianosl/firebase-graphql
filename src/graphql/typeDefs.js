@@ -6,6 +6,7 @@ export const typeDefs = gql`
     READY
     IN_CALL
     DONE
+    ABANDONED
   }
 
   type QueuePosition {
@@ -29,6 +30,12 @@ export const typeDefs = gql`
       position: String!
       updatedAt: String!
       attendanceId: String
+    ): QueuePosition!
+  }
+
+  type Mutation {
+    quitQueue(
+      queueId: String!
     ): QueuePosition!
   }
 
